@@ -15,13 +15,29 @@ function TodoApp() {
   };
   return (
     <div className="todo_app">
-      <Header addNewTask={addNewTask} />
+      <Header
+        addNewTask={addNewTask}
+        className={tasks.length > 0 ? "expand_collapse_tasks" : null}
+      />
       {tasks.length > 0 ? (
         <>
           <section className="main">
+            <input type="checkbox" id="toggle_all" className="toggle_all" />
+            <label htmlFor="toggle_all"></label>
             <ul className="todo_list">
               {tasks.map((task, index) => {
-                return <li key={index}>{task.content}</li>;
+                return (
+                  <li key={index}>
+                    <div>
+                      <label className="check">
+                        <input type="checkbox" className="toggle" />
+                        <span className="checkmark"></span>
+                        <button className="content">{task.content}</button>
+                      </label>
+                      <button className="delete"></button>
+                    </div>
+                  </li>
+                );
               })}
             </ul>
           </section>

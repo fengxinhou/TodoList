@@ -4,22 +4,109 @@
   position: relative;
   box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%), 0 25px 50px 0 rgb(0 0 0 / 10%);
 }
-
 .main {
   position: relative;
   z-index: 2;
   border-top: 1px solid #e6e6e6;
 }
+.toggle_all {
+  text-align: left;
+  border: none;
+  /*让单选框不显示*/
+  opacity: 0;
+  position: absolute;
+}
+
+.toggle_all + label {
+  width: 60px;
+  height: 34px;
+  font-size: 0;
+  position: absolute;
+  top: -52px;
+  left: -13px;
+  transform: rotate(90deg);
+}
+.toggle_all + label:before {
+  content: "❯";
+  font-size: 22px;
+  color: #e6e6e6;
+  padding: 10px 27px 10px 27px;
+}
+.toggle_all:checked + label:before {
+  color: #737373;
+}
+
 .todo_list li {
   position: relative;
+  padding: 13px 13px 13px 35px;
+  text-align: left;
   font-size: 24px;
-
   border-bottom: 1px solid #ededed;
 }
 .todo_list li:last-child {
   border-bottom: none;
 }
 
+.todo_list li .check {
+  display: block;
+}
+.todo_list li .check input[type="checkbox"] {
+  width: 0;
+  height: 0;
+  margin-right: 30px;
+}
+.todo_list li .check .checkmark {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  height: 30px;
+  width: 30px;
+  border: 1px solid #e6e6e6;
+  border-radius: 50%;
+}
+.todo_list li .check input:checked ~ .checkmark {
+  border-color: #737373;
+}
+.todo_list li .check .checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.todo_list li .check input:checked ~ .checkmark:after {
+  display: block;
+}
+.todo_list li .check .checkmark:after {
+  left: 11px;
+  top: 5px;
+  width: 6px;
+  height: 13px;
+  border: solid #2196f3;
+  border-width: 0 2px 2px 0;
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+.todo_list li .delete {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  width: 40px;
+  height: 40px;
+  margin: auto 0;
+  font-size: 30px;
+  color: #cc9a9a;
+  transition: color 0.3s ease-out;
+}
+.todo_list li .delete:hover {
+  color: #af5b5e;
+}
+.todo_list li .delete:after {
+  content: "X";
+}
+.todo_list li:hover .delete {
+  display: block;
+}
 .footer {
   color: #777;
   padding: 10px 15px;
@@ -50,6 +137,9 @@
   position: absolute;
   right: 0;
   left: 0;
+}
+ul {
+  display: block;
 }
 .filters li {
   display: inline;
