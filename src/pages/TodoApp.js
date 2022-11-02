@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import "./todoApp.css";
 import Header from "../component/header/Header";
 import TodoList from "../component/todoList/TodoList";
+import Footer from "../component/footer/Footer";
+
+export const CHECK_OPTIONS = {
+  ALL: "全部",
+  COMPLETED: "已完成",
+  UNCOMPLETED: "未完成",
+};
 function TodoApp() {
   const [tasks, setTasks] = useState([]);
   const addNewTask = (value) => {
@@ -17,6 +24,15 @@ function TodoApp() {
   const editTasks = (tasks) => {
     setTasks(tasks);
   };
+  const selectAllTasks = (tasks) => {
+    const newTasks = tasks.map((task) => {
+      return {
+        ...task,
+        completed: !task.completed,
+      };
+    });
+    setTasks(newTasks);
+  };
   return (
     <div className="todo_app">
       <Header
@@ -25,26 +41,12 @@ function TodoApp() {
       />
       {tasks.length > 0 ? (
         <>
-          <TodoList tasks={tasks} editTasks={editTasks} />
-          <footer className="footer">
-            <span className="todo_count">
-              <strong>3</strong>
-              <span> </span>
-              <span>items</span>
-              <span> left</span>
-            </span>
-            <ul className="filters">
-              <li>
-                <a href="#/">All</a>
-              </li>
-              <li>
-                <a href="#/active">Active</a>
-              </li>
-              <li>
-                <a href="#/completed">Completed</a>
-              </li>
-            </ul>
-          </footer>
+          <TodoList
+            tasks={tasks}
+            editTasks={editTasks}
+            allTasks={selectAllTasks}
+          />
+          <Footer />
         </>
       ) : null}
     </div>

@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import "./todoList.css";
 import Modal from "../Modal/Modal";
 function TodoList(props) {
-  const { tasks, editTasks } = props;
+  const { tasks, editTasks, allTasks } = props;
   const [modalOpen, setModalOpen] = useState(false);
   const [modifyTask, setModifyTask] = useState({});
+  const selectAllTask = () => {
+    allTasks(tasks);
+  };
   const changeCheck = (id) => {
     const newTasks = tasks.map((item) => {
       if (item.id === id) {
@@ -50,7 +53,12 @@ function TodoList(props) {
   };
   return (
     <section className="main">
-      <input type="checkbox" id="toggle_all" className="toggle_all" />
+      <input
+        type="checkbox"
+        id="toggle_all"
+        className="toggle_all"
+        onChange={selectAllTask}
+      />
       <label htmlFor="toggle_all"></label>
       <ul className="todo_list">
         {tasks.map(({ id, content, completed }, index) => {
