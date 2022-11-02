@@ -11,6 +11,8 @@ export const CHECK_OPTIONS = {
 };
 function TodoApp() {
   const [tasks, setTasks] = useState([]);
+  const [filterParam, setFilterParam] = useState(CHECK_OPTIONS.ALL);
+
   const addNewTask = (value) => {
     if (value) {
       const newTask = {
@@ -46,7 +48,7 @@ function TodoApp() {
             editTasks={editTasks}
             allTasks={selectAllTasks}
           />
-          <Footer />
+          <Footer tasks={tasks} filterParam={filterParam} />
         </>
       ) : null}
     </div>
