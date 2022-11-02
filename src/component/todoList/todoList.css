@@ -3,14 +3,13 @@
   z-index: 2;
   border-top: 1px solid #e6e6e6;
 }
+
 .toggle_all {
   text-align: left;
   border: none;
-  /*让单选框不显示*/
   opacity: 0;
   position: absolute;
 }
-
 .toggle_all + label {
   width: 60px;
   height: 34px;
@@ -77,6 +76,24 @@
   border-width: 0 2px 2px 0;
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+.todo_list li .done {
+  text-decoration: line-through;
+  color: gray;
+  transition: color 0.3s ease-out;
+}
+
+.todo_list li button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 100%;
+  vertical-align: baseline;
+  font-family: inherit;
+  font-weight: inherit;
+  color: inherit;
+  appearance: none;
 }
 .todo_list li .delete {
   display: none;

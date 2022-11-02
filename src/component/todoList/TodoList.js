@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./todoList.css";
+import Modal from "../Modal/Modal";
 function TodoList(props) {
   const { tasks, editTasks } = props;
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modifyTask, setModifyTask] = useState({});
   const changeCheck = (id) => {
     const newTasks = tasks.map((item) => {
       if (item.id === id) {
@@ -17,6 +20,33 @@ function TodoList(props) {
   const deleteTask = (id) => {
     const newTasks = tasks.filter((task) => task.id !== id);
     editTasks(newTasks);
+  };
+  const showModal = (id, content) => {
+    setModifyTask({ id, content });
+    setModalOpen(true);
+  };
+  const editTask = (modalInputText, itemId) => {
+    const newTasks = tasks.map((item) => {
+      if (item.id === itemId) {
+        return {
+          ...item,
+          content: modalInputText,
+        };
+      }
+      return item;
+    });
+    editTasks(newTasks);
+    setModalOpen(false);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
+  const clickEscCode = (e) => {
+    if (modalOpen && e.keyCode === 27) {
+      setModalOpen(false);
+    }
   };
   return (
     <section className="main">
@@ -34,7 +64,12 @@ function TodoList(props) {
                     onChange={() => changeCheck(id)}
                   />
                   <span className="checkmark"></span>
-                  <button className="content">{content}</button>
+                  <button
+                    className={completed ? "done" : null}
+                    onClick={() => showModal(id, content)}
+                  >
+                    {content}
+                  </button>
                 </label>
                 <button
                   className="delete"
@@ -45,6 +80,13 @@ function TodoList(props) {
           );
         })}
       </ul>
+      <Modal
+        visible={modalOpen}
+        editTask={editTask}
+        modifyTask={modifyTask}
+        onClose={handleCloseModal}
+        clickEscCode={clickEscCode}
+      />
     </section>
   );
 }
