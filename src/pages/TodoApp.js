@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./todoApp.css";
 import Header from "../component/header/Header";
+import TodoList from "../component/todoList/TodoList";
 function TodoApp() {
   const [tasks, setTasks] = useState([]);
   const addNewTask = (value) => {
@@ -13,6 +14,9 @@ function TodoApp() {
       setTasks([...tasks, newTask]);
     }
   };
+  const editTasks = (tasks) => {
+    setTasks(tasks);
+  };
   return (
     <div className="todo_app">
       <Header
@@ -21,26 +25,7 @@ function TodoApp() {
       />
       {tasks.length > 0 ? (
         <>
-          <section className="main">
-            <input type="checkbox" id="toggle_all" className="toggle_all" />
-            <label htmlFor="toggle_all"></label>
-            <ul className="todo_list">
-              {tasks.map((task, index) => {
-                return (
-                  <li key={index}>
-                    <div>
-                      <label className="check">
-                        <input type="checkbox" className="toggle" />
-                        <span className="checkmark"></span>
-                        <button className="content">{task.content}</button>
-                      </label>
-                      <button className="delete"></button>
-                    </div>
-                  </li>
-                );
-              })}
-            </ul>
-          </section>
+          <TodoList tasks={tasks} editTasks={editTasks} />
           <footer className="footer">
             <span className="todo_count">
               <strong>3</strong>
