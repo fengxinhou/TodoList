@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import "./todoApp.css";
 import Header from "../component/header/Header";
 import TodoList from "../component/todoList/TodoList";
@@ -9,10 +9,12 @@ export const CHECK_OPTIONS = {
   UNCOMPLETED: "Active",
   COMPLETED: "Completed",
 };
+
+export const Context = createContext("");
+
 function TodoApp() {
   const [tasks, setTasks] = useState([]);
   const [filterParam, setFilterParam] = useState(CHECK_OPTIONS.ALL);
-
   const addNewTask = (value) => {
     if (value) {
       const newTask = {
@@ -45,24 +47,17 @@ function TodoApp() {
   };
 
   return (
-    <div className="todo_app">
-      <Header addNewTask={addNewTask} />
-      {tasks.length > 0 ? (
-        <>
-          <TodoList
-            tasks={tasks}
-            editTasks={editTasks}
-            checkAllTasks={checkAllTasks}
-            filterParam={filterParam}
-          />
-          <Footer
-            tasks={tasks}
-            filterParam={filterParam}
-            changeCheckSelection={changeCheckSelection}
-          />
-        </>
-      ) : null}
-    </div>
+    <Context.Provider value={{ tasks: tasks, filterParam: filterParam }}>
+      <div className="todo_app">
+        <Header addNewTask={addNewTask} />
+        {tasks.length > 0 ? (
+          <>
+            <TodoList editTasks={editTasks} checkAllTasks={checkAllTasks} />
+            <Footer changeCheckSelection={changeCheckSelection} />
+          </>
+        ) : null}
+      </div>
+    </Context.Provider>
   );
 }
 

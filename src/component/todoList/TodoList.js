@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./todoList.css";
 import Modal from "../Modal/Modal";
-import { CHECK_OPTIONS } from "../../pages/TodoApp";
+import { CHECK_OPTIONS, Context } from "../../pages/TodoApp";
 function TodoList(props) {
-  const { tasks, editTasks, checkAllTasks, filterParam } = props;
+  const { editTasks, checkAllTasks } = props;
+  const { tasks, filterParam } = useContext(Context);
   const [modalOpen, setModalOpen] = useState(false);
   const [modifyTask, setModifyTask] = useState({});
 
