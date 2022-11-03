@@ -18,12 +18,12 @@
   left: -11px;
   transform: rotate(90deg);
 }
-.toggle_all + label:before {
+.toggle_all + label::before {
   content: "❯";
   font-size: 22px;
   color: #e6e6e6;
 }
-.toggle_all:checked + label:before {
+.toggle_all:checked + label::before {
   color: #737373;
 }
 
@@ -54,15 +54,15 @@
 .todo_list li .check input:checked ~ .checkmark {
   border-color: #2196f3;
 }
-.todo_list li .check .checkmark:after {
+.todo_list li .check .checkmark::after {
   content: "";
   position: absolute;
   display: none;
 }
-.todo_list li .check input:checked ~ .checkmark:after {
+.todo_list li .check input:checked ~ .checkmark::after {
   display: block;
 }
-.todo_list li .check .checkmark:after {
+.todo_list li .check .checkmark::after {
   left: 11px;
   top: 5px;
   width: 6px;
@@ -73,7 +73,7 @@
 }
 .todo_list li .done {
   text-decoration: line-through;
-  color: gray;
+  color: lightgray;
   transition: color 0.3s ease-out;
 }
 .todo_list li button {
@@ -94,17 +94,17 @@
   top: 0;
   right: 10px;
   bottom: 0;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin: auto;
-  font-size: 30px;
+  font-size: 20px;
   color: #cc9a9a;
   transition: color 0.3s ease-out;
 }
 .todo_list li .delete:hover {
   color: #af5b5e;
 }
-.todo_list li .delete:after {
+.todo_list li .delete::after {
   content: "X";
 }
 .todo_list li:hover .delete {

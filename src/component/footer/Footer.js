@@ -4,16 +4,11 @@ import { CHECK_OPTIONS } from "../../pages/TodoApp";
 
 function Footer(props) {
   const { tasks, changeCheckSelection, filterParam } = props;
-  const filterTask =
-    filterParam === CHECK_OPTIONS.COMPLETED
-      ? tasks.filter(({ completed }) => completed)
-      : filterParam === CHECK_OPTIONS.UNCOMPLETED
-      ? tasks.filter(({ completed }) => !completed)
-      : tasks;
+
   return (
     <footer className="footer">
       <span className="todo_count">
-        <strong>{filterTask.length}</strong>
+        <strong>{tasks.filter(({ completed }) => !completed).length}</strong>
         <span> </span>
         <span>items</span>
         <span> left</span>

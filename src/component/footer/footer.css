@@ -3,7 +3,7 @@
   height: 30px;
   border-top: 1px solid #e6e6e6;
 }
-.footer:before {
+.footer::before {
   content: "";
   position: absolute;
   right: 0;
