@@ -3,7 +3,7 @@ import "./todoList.css";
 import Modal from "../Modal/Modal";
 import { CHECK_OPTIONS } from "../../pages/TodoApp";
 function TodoList(props) {
-  const { tasks, editTasks, allTasks, filterParam } = props;
+  const { tasks, editTasks, checkAllTasks, filterParam } = props;
   const [modalOpen, setModalOpen] = useState(false);
   const [modifyTask, setModifyTask] = useState({});
 
@@ -15,15 +15,15 @@ function TodoList(props) {
       : tasks;
 
   const selectAllTask = () => {
-    allTasks(tasks);
+    checkAllTasks(tasks);
   };
 
-  const changeCheck = (id) => {
+  const updateTask = (id, check) => {
     const newTasks = tasks.map((item) => {
       if (item.id === id) {
         return {
           ...item,
-          completed: !item.completed,
+          completed: check,
         };
       }
       return item;
@@ -83,7 +83,7 @@ function TodoList(props) {
                   <input
                     type="checkbox"
                     checked={completed}
-                    onChange={() => changeCheck(id)}
+                    onChange={(e) => updateTask(id, e.target.checked)}
                   />
                   <span className="checkmark"></span>
                   <button

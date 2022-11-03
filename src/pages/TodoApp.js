@@ -23,14 +23,18 @@ function TodoApp() {
       setTasks([...tasks, newTask]);
     }
   };
+
   const editTasks = (tasks) => {
     setTasks(tasks);
   };
-  const selectAllTasks = (tasks) => {
+
+  const checkAllTasks = (tasks) => {
+    let doneCount = tasks.filter((task) => task.completed).length;
+    let allCount = tasks.length;
     const newTasks = tasks.map((task) => {
       return {
         ...task,
-        completed: !task.completed,
+        completed: doneCount !== allCount,
       };
     });
     setTasks(newTasks);
@@ -50,7 +54,7 @@ function TodoApp() {
           <TodoList
             tasks={tasks}
             editTasks={editTasks}
-            allTasks={selectAllTasks}
+            checkAllTasks={checkAllTasks}
             filterParam={filterParam}
           />
           <Footer
