@@ -35,6 +35,7 @@ function TodoApp() {
     });
     setTasks(newTasks);
   };
+
   return (
     <div className="todo_app">
       <Header

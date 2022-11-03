@@ -5,6 +5,7 @@ function TodoList(props) {
   const { tasks, editTasks, allTasks } = props;
   const [modalOpen, setModalOpen] = useState(false);
   const [modifyTask, setModifyTask] = useState({});
+
   const selectAllTask = () => {
     allTasks(tasks);
   };
@@ -24,10 +25,6 @@ function TodoList(props) {
     const newTasks = tasks.filter((task) => task.id !== id);
     editTasks(newTasks);
   };
-  const showModal = (id, content) => {
-    setModifyTask({ id, content });
-    setModalOpen(true);
-  };
   const editTask = (modalInputText, itemId) => {
     const newTasks = tasks.map((item) => {
       if (item.id === itemId) {
@@ -41,6 +38,10 @@ function TodoList(props) {
     editTasks(newTasks);
     setModalOpen(false);
   };
+  const showModal = (id, content) => {
+    setModifyTask({ id, content });
+    setModalOpen(true);
+  };
 
   const handleCloseModal = () => {
     setModalOpen(false);
@@ -51,6 +52,7 @@ function TodoList(props) {
       setModalOpen(false);
     }
   };
+
   return (
     <section className="main">
       <input
