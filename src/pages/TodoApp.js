@@ -39,16 +39,14 @@ function TodoApp() {
     });
     setTasks(newTasks);
   };
+
   const changeCheckSelection = (value) => {
     setFilterParam(value);
   };
 
   return (
     <div className="todo_app">
-      <Header
-        addNewTask={addNewTask}
-        className={tasks.length > 0 ? "expand_collapse_tasks" : null}
-      />
+      <Header addNewTask={addNewTask} />
       {tasks.length > 0 ? (
         <>
           <TodoList
