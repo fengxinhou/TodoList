@@ -3,7 +3,7 @@ import "./footer.css";
 import { CHECK_OPTIONS } from "../../pages/TodoApp";
 
 function Footer(props) {
-  const { tasks, filterParam } = props;
+  const { tasks, changeCheckSelection, filterParam } = props;
   const filterTask =
     filterParam === CHECK_OPTIONS.COMPLETED
       ? tasks.filter(({ completed }) => completed)
@@ -22,7 +22,14 @@ function Footer(props) {
         {Object.values(CHECK_OPTIONS).map((item, index) => {
           return (
             <li className="check_radio" key={index}>
-              <input type="radio" value={item} name="searchData" id={item} />
+              <input
+                type="radio"
+                value={item}
+                name="searchData"
+                id={item}
+                checked={filterParam === item}
+                onChange={() => changeCheckSelection(item)}
+              />
               <label htmlFor={item}>{item}</label>
             </li>
           );

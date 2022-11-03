@@ -5,9 +5,9 @@ import TodoList from "../component/todoList/TodoList";
 import Footer from "../component/footer/Footer";
 
 export const CHECK_OPTIONS = {
-  ALL: "全部",
-  COMPLETED: "已完成",
-  UNCOMPLETED: "未完成",
+  ALL: "All",
+  UNCOMPLETED: "Active",
+  COMPLETED: "Completed",
 };
 function TodoApp() {
   const [tasks, setTasks] = useState([]);
@@ -35,6 +35,9 @@ function TodoApp() {
     });
     setTasks(newTasks);
   };
+  const changeCheckSelection = (value) => {
+    setFilterParam(value);
+  };
 
   return (
     <div className="todo_app">
@@ -48,8 +51,13 @@ function TodoApp() {
             tasks={tasks}
             editTasks={editTasks}
             allTasks={selectAllTasks}
+            filterParam={filterParam}
           />
-          <Footer tasks={tasks} filterParam={filterParam} />
+          <Footer
+            tasks={tasks}
+            filterParam={filterParam}
+            changeCheckSelection={changeCheckSelection}
+          />
         </>
       ) : null}
     </div>
