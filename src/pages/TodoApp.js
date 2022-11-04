@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import "./todoApp.css";
 import Header from "../component/header/Header";
 import TodoList from "../component/todoList/TodoList";
@@ -14,13 +14,14 @@ export const TodoContext = createContext({});
 
 function TodoApp() {
   const [filterParam, setFilterParam] = useState(() => {
-    return window.localStorage.getItem("filter") || CHECK_OPTIONS.ALL;
+    return localStorage.getItem("filter") || CHECK_OPTIONS.ALL;
   });
   const [tasks, setTasks] = useState(() => {
-    return JSON.parse(window.localStorage.getItem("todos")) || [];
+    return JSON.parse(localStorage.getItem("todos")) || [];
   });
-  window.localStorage.setItem("todos", JSON.stringify(tasks));
-
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(tasks));
+  });
   const addNewTask = (value) => {
     if (value) {
       const newTask = {
