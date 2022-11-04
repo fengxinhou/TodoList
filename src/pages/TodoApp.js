@@ -13,12 +13,17 @@ export const CHECK_OPTIONS = {
 export const Context = createContext("");
 
 function TodoApp() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(() => {
+    return JSON.parse(window.sessionStorage.getItem("todos")) || [];
+  });
+  // JSON.parse(window.sessionStorage.getItem("todos"))
   const [filterParam, setFilterParam] = useState(CHECK_OPTIONS.ALL);
+  window.sessionStorage.setItem("todos", JSON.stringify(tasks));
+
   const addNewTask = (value) => {
     if (value) {
       const newTask = {
-        id: tasks.length,
+        id: tasks.length > 0 ? tasks[tasks.length - 1].id + 1 : 0,
         content: value,
         completed: false,
       };
@@ -47,7 +52,7 @@ function TodoApp() {
   };
 
   return (
-    <Context.Provider value={{ tasks: tasks, filterParam: filterParam }}>
+    <Context.Provider value={{ tasks, filterParam }}>
       <div className="todo_app">
         <Header addNewTask={addNewTask} />
         {tasks.length > 0 ? (
