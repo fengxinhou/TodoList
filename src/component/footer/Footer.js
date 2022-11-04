@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import "./footer.css";
-import { CHECK_OPTIONS, Context } from "../../pages/TodoApp";
+import { CHECK_OPTIONS, TodoContext } from "../../pages/TodoApp";
 
 function Footer(props) {
   const { changeCheckSelection } = props;
-  const { tasks, filterParam } = useContext(Context);
+  const { tasks, filterParam } = useContext(TodoContext);
   return (
     <footer className="footer">
       <span className="todo_count">

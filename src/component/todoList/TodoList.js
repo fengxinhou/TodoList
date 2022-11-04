@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import "./todoList.css";
 import Modal from "../Modal/Modal";
-import { CHECK_OPTIONS, Context } from "../../pages/TodoApp";
+import { CHECK_OPTIONS, TodoContext } from "../../pages/TodoApp";
 function TodoList(props) {
   const { editTasks, checkAllTasks } = props;
-  const { tasks, filterParam } = useContext(Context);
+  const { tasks, filterParam } = useContext(TodoContext);
   const [modalOpen, setModalOpen] = useState(false);
   const [modifyTask, setModifyTask] = useState({});
 
@@ -14,7 +14,9 @@ function TodoList(props) {
       : filterParam === CHECK_OPTIONS.UNCOMPLETED
       ? tasks.filter(({ completed }) => !completed)
       : tasks;
+  // window.localStorage.setItem("todos", JSON.stringify(filterTask));
 
+  // useEffect(() => {}, []);
   const selectAllTask = () => {
     checkAllTasks(tasks);
   };

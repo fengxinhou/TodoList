@@ -10,15 +10,16 @@ export const CHECK_OPTIONS = {
   COMPLETED: "Completed",
 };
 
-export const Context = createContext("");
+export const TodoContext = createContext({});
 
 function TodoApp() {
-  const [tasks, setTasks] = useState(() => {
-    return JSON.parse(window.sessionStorage.getItem("todos")) || [];
+  const [filterParam, setFilterParam] = useState(() => {
+    return window.localStorage.getItem("filter") || CHECK_OPTIONS.ALL;
   });
-  // JSON.parse(window.sessionStorage.getItem("todos"))
-  const [filterParam, setFilterParam] = useState(CHECK_OPTIONS.ALL);
-  window.sessionStorage.setItem("todos", JSON.stringify(tasks));
+  const [tasks, setTasks] = useState(() => {
+    return JSON.parse(window.localStorage.getItem("todos")) || [];
+  });
+  window.localStorage.setItem("todos", JSON.stringify(tasks));
 
   const addNewTask = (value) => {
     if (value) {
@@ -49,10 +50,11 @@ function TodoApp() {
 
   const changeCheckSelection = (value) => {
     setFilterParam(value);
+    localStorage.setItem("filter", value);
   };
 
   return (
-    <Context.Provider value={{ tasks, filterParam }}>
+    <TodoContext.Provider value={{ filterParam: filterParam, tasks: tasks }}>
       <div className="todo_app">
         <Header addNewTask={addNewTask} />
         {tasks.length > 0 ? (
@@ -62,7 +64,7 @@ function TodoApp() {
           </>
         ) : null}
       </div>
-    </Context.Provider>
+    </TodoContext.Provider>
   );
 }
 
